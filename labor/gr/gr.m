@@ -2,6 +2,16 @@
 clear all;
 close all;
 
+SHOW_PLOTS      = 1;          % 1 = show all plots
+GENERATE_PLOTS  = 1;          % 1 = generate PDF of all plots
+PDF_DESTINATION = './plots/';
+graphics_toolkit('qt');
+
+% CSV Attributes
+HEADERLENGTH  = 16; % length of header in CSV datafiles
+TIME          = 4;  % time vector position
+VALUE         = 5;  % value vector position
+
 f = 50; % Frequenz [Hz]
 
 % Messung der Induktivität AC
@@ -18,7 +28,7 @@ xl = sqrt(zl^2 - rl^2); % [Ohm]
 L = xl/(2*pi*f);        % [H]  
 
 %------------------------------------------------------------------------------
-% Einphasige Brückenschaltung - Ungesteuerter Betrieb
+% 6.3.1 Einphasige Brückenschaltung - Ungesteuerter Betrieb
 
 % Messung 1, GR mit Glättung induktiv, Lastposition 16 (27 Ohm Stellwiderstand)
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -26,6 +36,42 @@ L = xl/(2*pi*f);        % [H]
 %   CH3:    DC-Spannung gemessen mit Differentialsonde
 %   Ordner: ALL0001
 
+if GENERATE_PLOTS == 1
+  % load channel data
+  m_01_ch_1 = dlmread('./data/ALL0001/F0001CH1.CSV', ',', 16, 0);
+  m_01_ch_3 = dlmread('./data/ALL0001/F0001CH3.CSV', ',', 16, 0);
+
+  % prepare data correction
+  mi    = m_01_ch_1(2,TIME) - m_01_ch_1(1,TIME);  % measurement interval
+  le    = m_01_ch_1(length(m_01_ch_1),TIME);      % last element value
+  time  = [m_01_ch_1(1,TIME):mi:le];              % correct time
+  
+  % load data vectors
+  time_current  = m_01_ch_1(:,TIME);
+  current       = m_01_ch_1(:,VALUE);
+  time_voltage  = m_01_ch_3(:,TIME);
+  voltage       = m_01_ch_3(:,VALUE);
+
+  % interpolate corrupt data
+  current  = interp1(time_current, current, time, 'spline');
+  
+  if SHOW_PLOTS == 1
+    hf = figure(1);
+  else
+    hf = figure(1, 'display', 'off');
+  end
+  ax = plotyy(time*1E3, current, time*1E3, voltage);
+  legend('Laststrom [A]', 'Ausgangsspannung [V]');
+  title('B2 mit L-Glättung');
+  xlabel('Zeit [ms]');
+  ylabel(ax(1), 'Strom [A]');
+  ylabel(ax(2), 'Spannung [V]');
+  grid on;
+  % set(gcf, 'PaperType', 'A4', 'PaperOrientation', 'landscape', 'PaperPositionMode', 'manual', 'PaperUnits', 'centimeters', 'Paperposition', '5 5 28.7 20');
+  % print(hf, '-dpdf', strcat(PDF_DESTINATION, '631_01.pdf'));
+  print(hf, '-dpdf', strcat(PDF_DESTINATION, '631_01.pdf'));
+end
+  
 % Messung 2, GR mit Glättung induktiv, Lastposition 11 (27 Ohm Stellwiderstand)
 %   CH1:    Laststrom gemessen mit Stromzange 
 %   CH2:    Laststrom gemessen mit LEM-Wandler
