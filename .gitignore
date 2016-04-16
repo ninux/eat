@@ -1,4 +1,5 @@
 labor/gr/report/gr.pdf
+labor/gr/plots/*.pdf
 # Created by https://www.gitignore.io/api/latex,matlab
 
 ### LaTeX ###
