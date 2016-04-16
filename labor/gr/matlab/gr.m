@@ -13,20 +13,7 @@ HEADERLENGTH  = 16; % length of header in CSV datafiles
 TIME          = 4;  % time vector position
 VALUE         = 5;  % value vector position
 
-f = 50; % Frequenz [Hz]
-
-% Messung der Induktivität AC
-il = [ 5  10];  % [A]
-ul = [87 172];  % [V]
-
-% Messung der Induktivität DC
-idc = [5    10];        % [A]
-udc = [0.86  1.72];     % [V]
-
-rl = mean(udc./idc);    % [Ohm]
-zl = mean(ul./il);      % [Ohm]
-xl = sqrt(zl^2 - rl^2); % [Ohm]
-L = xl/(2*pi*f);        % [H]  
+gr62
 
 %------------------------------------------------------------------------------
 % 6.3.1 Einphasige Brückenschaltung - Ungesteuerter Betrieb
