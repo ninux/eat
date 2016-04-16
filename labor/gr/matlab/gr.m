@@ -4,7 +4,8 @@ close all;
 
 SHOW_PLOTS      = 1;          % 1 = show all plots
 SAVE_PLOTS      = 1;          % 1 = save plots as PDF
-PDF_DESTINATION = './plots/';
+DATA_DESTINATION = '../data/';
+PDF_DESTINATION = '../plots/';
 %graphics_toolkit('qt');
 
 % CSV Attributes
@@ -37,8 +38,8 @@ L = xl/(2*pi*f);        % [H]
 %   Ordner: ALL0001
 
 % load channel data
-m_01_ch_1 = dlmread('./data/ALL0001/F0001CH1.CSV', ',', 16, 0);
-m_01_ch_3 = dlmread('./data/ALL0001/F0001CH3.CSV', ',', 16, 0);
+m_01_ch_1 = dlmread([DATA_DESTINATION 'ALL0001/F0001CH1.CSV'], ',', 16, 0);
+m_01_ch_3 = dlmread([DATA_DESTINATION 'ALL0001/F0001CH3.CSV'], ',', 16, 0);
 
 % prepare data correction
 mi    = m_01_ch_1(2,TIME) - m_01_ch_1(1,TIME);  % measurement interval
