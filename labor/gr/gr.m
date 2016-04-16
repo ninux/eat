@@ -5,7 +5,7 @@ close all;
 SHOW_PLOTS      = 1;          % 1 = show all plots
 SAVE_PLOTS      = 1;          % 1 = save plots as PDF
 PDF_DESTINATION = './plots/';
-graphics_toolkit('qt');
+%graphics_toolkit('qt');
 
 % CSV Attributes
 HEADERLENGTH  = 16; % length of header in CSV datafiles
@@ -55,11 +55,11 @@ voltage       = m_01_ch_3(:,VALUE);
 current  = interp1(time_current, current, time, 'spline');
 
 hf = figure('visible', 'off');
-% set(gcf, 'PaperType', 'A4', 'PaperOrientation', 'landscape', 'PaperPositionMode', 'manual', 'PaperUnits', 'centimeters', 'Paperposition', [1 1 30 20]);
-set(gcf, "paperorientation", "landscape");
-papersize = [30, 21]/2.54;
-set(gcf, "papersize", papersize);
-set(gcf, "paperposition", [0.25 0.25, papersize-0.5]);
+set(gcf, 'PaperType', 'A4', 'PaperOrientation', 'landscape', 'PaperPositionMode', 'manual', 'PaperUnits', 'centimeters', 'Paperposition', [0 0 30 20]);
+%set(gcf, 'paperorientation', 'landscape');
+%papersize = [30, 21]/2.54;
+%set(gcf, 'papersize', papersize);
+%set(gcf, 'paperposition', [0.25 0.25, papersize-0.5]);
 
 ax = plotyy(time*1E3, current, time*1E3, voltage);
 legend('Laststrom [A]', 'Ausgangsspannung [V]');
@@ -69,7 +69,7 @@ ylabel(ax(1), 'Strom [A]');
 ylabel(ax(2), 'Spannung [V]');
 grid on;
 
-print(hf, '-dpdf', '-color', strcat(PDF_DESTINATION, '631_01.pdf'));
+print(hf, '-dpdf', strcat(PDF_DESTINATION, '631_01.pdf'));
   
 % Messung 2, GR mit Glättung induktiv, Lastposition 11 (27 Ohm Stellwiderstand)
 %   CH1:    Laststrom gemessen mit Stromzange 
