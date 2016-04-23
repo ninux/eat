@@ -36,53 +36,40 @@ gr632
 
 gr641
 
-% Messung 13, GR mit Glättung induktiv, Lastposition 16 (2x27 Ohm Stellwiderstand)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    -
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    L1-L2 Spannung gemessen mit Differentialsonde
-%   Ordner: ALL0019
-
-% Messung 14, GR mit Glättung induktiv, Lastposition 11 (2x27 Ohm Stellwiderstand)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    -
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    L1-L2 Spannung gemessen mit Differentialsonde
-%   Ordner: ALL0020
-
-% Messung 15, GR mit Glättung induktiv, Lastposition 6 (2x27 Ohm Stellwiderstand)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    -
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    L1-L2 Spannung gemessen mit Differentialsonde
-%   Ordner: ALL0021
-
-% Messung 16, GR mit Glättung induktiv, Lastposition 4 (2x27 Ohm Stellwiderstand)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    -
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    L1-L2 Spannung gemessen mit Differentialsonde
-%   Ordner: ALL0022
-
 %------------------------------------------------------------------------------
 % Dreiphasige Brückenschaltung - Gesteuerter Betrieb
+
+gr642
+
 %------------------------------------------------------------------------------
 % Kommutierung
+
 %------------------------------------------------------------------------------
 % Strombegrenzung
+
 %------------------------------------------------------------------------------
 % Spannungsbelastung der Halbleiter
+
 %------------------------------------------------------------------------------
 % Wechselrichterbetrieb
+
 %------------------------------------------------------------------------------
 % Netzrückwirkungen
+
+gr66
+
 %------------------------------------------------------------------------------
 % Stromoberschwingungen
+
 %------------------------------------------------------------------------------
 % Leistungsfaktor
+
 %------------------------------------------------------------------------------
 % Kommutierungseinbrüche
+
 %------------------------------------------------------------------------------
 % 12-pulsiger Betrieb
+
 %------------------------------------------------------------------------------
 % Aktives Oberwellenfilter
+
