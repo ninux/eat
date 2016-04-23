@@ -80,7 +80,7 @@ xlabel('Zeit [ms]');
 ylabel('Spannung [V]');
 grid on;
 
-print('-dpdf', strcat(PDF_DESTINATION, '632_01.pdf'));
+print('-dpdf', strcat(PDF_DESTINATION, '642_01.pdf'));
 
 % Messung 14, GR mit Glättung induktiv, Last = 8A, alpha ca. 90° (gerade kein Lücken)
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -151,7 +151,7 @@ xlabel('Zeit [ms]');
 ylabel('Spannung [V]');
 grid on;
 
-print('-dpdf', strcat(PDF_DESTINATION, '632_02.pdf'));
+print('-dpdf', strcat(PDF_DESTINATION, '642_02.pdf'));
 
 % Messung 15, GR mit Glättung induktiv, Last = 8A, alpha ca. 60°
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -222,7 +222,7 @@ xlabel('Zeit [ms]');
 ylabel('Spannung [V]');
 grid on;
 
-print('-dpdf', strcat(PDF_DESTINATION, '632_03.pdf'));
+print('-dpdf', strcat(PDF_DESTINATION, '642_03.pdf'));
 
 % Messung 16, GR mit Glättung induktiv, Last = 8A, alpha ca. 210?° (Lücken)
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -293,7 +293,7 @@ xlabel('Zeit [ms]');
 ylabel('Spannung [V]');
 grid on;
 
-print('-dpdf', strcat(PDF_DESTINATION, '632_04.pdf'));
+print('-dpdf', strcat(PDF_DESTINATION, '642_04.pdf'));
 
 % Messung 17, GR mit Glättung induktiv, Last = 8A, alpha ca. °
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -364,7 +364,7 @@ xlabel('Zeit [ms]');
 ylabel('Spannung [V]');
 grid on;
 
-print('-dpdf', strcat(PDF_DESTINATION, '632_05.pdf'));
+print('-dpdf', strcat(PDF_DESTINATION, '642_05.pdf'));
 
 % Messung 18, GR mit Glättung induktiv, Last = 8A, alpha ca. 10?°
 %   CH1:    Laststrom gemessen mit Stromzange 
