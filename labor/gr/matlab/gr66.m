@@ -48,7 +48,7 @@ ylabel('Strom [A]');
 grid on;
 
 subplot(3, 1, 2);
-plot(time*1E3, voltage_1, 'r', 'LineWidth', LINEWIDTH);
+plot(time*1E3, voltage_1, 'b', 'LineWidth', LINEWIDTH);
 axis([time(1)*1E3 time(end)*1E3 MIN_VOLT_1 MAX_VOLT_1]);
 title('DC Spannung Gleichrichter 1 [V]');
 xlabel('Zeit [ms]');
