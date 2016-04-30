@@ -1,0 +1,27 @@
+\section{Datenwiederherstellung}
+Die Spannungsverläufe werden bei den Messungen als Bild (*.BMP) als auch als 
+Messwerte (*.CSV) auf die CF Karte gespeichert. Bei der nachträglichen 
+Auswertung wird festgestellt, dass einzelne Messreihen korrupt sind. 
+Das Einlesen der Daten mittels \verb!dlmread! wird mit folgender Fehlermeldung 
+abgebrochen: 
+\lstinputlisting[breaklines=true, caption=Fehlermeldung]
+{../data_corrupt/ALL0001/Error.txt}
+Wird die Datei in Excel importiert, fällt zunächst nur auf, dass die korrupte 
+Datei weniger Linien enthält als eine normale Datei. Mit einem Editor wie Vim 
+geöffnet, zeigt sich an der betroffenen Stelle folgendes Bild: 
+\lstinputlisting[firstnumber=754,firstline=754,lastline=778,breaklines=true,
+caption=Ausschnitt aus korrupten Daten wie mit VIM dargestellt]
+{../data_corrupt/ALL0001/F0001CH1_corr.CSV}
+\clearpage
+Wird die entsprechende Stelle mit einem Hex Editor dargestellt, zeigt sich, 
+dass die seltsamen Zeichen binäre Nullen sind: 
+\lstinputlisting[firstnumber=1532,firstline=1532,lastline=1573,breaklines=true,
+caption=Ausschnitt aus korrupten Daten dargestellt mit einem Hex Editor]
+{../data_corrupt/ALL0001/F0001CH1.hex}
+Wird die fehlerhafte Zeile gelöscht, fehlen an der entsprechenden Stelle 
+Messwerte. Zudem sind die Vektoren der verschiedenen Kanäle nicht mehr gleich 
+lang, was ein weiteres Verarbeiten erschwert. Daher werden die fehlenden 
+Messwerte interpoliert. Damit können die Daten weiter verarbeitet werden. 
+\lstinputlisting[firstnumber=41,firstline=41,lastline=41,breaklines=true,
+caption=Interpolation der Messdaten]
+{../matlab/gr631.m}
