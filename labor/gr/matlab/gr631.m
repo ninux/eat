@@ -80,7 +80,7 @@ semilogy(f(1:100), (current_fft_i(1:100))*2/numel(current_fft_i), 'b', 'LineWidt
 ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
-ylabel('Strom [dBA]');
+ylabel('Strom [A]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_01_fft.pdf'));
@@ -146,7 +146,7 @@ semilogy(f(1:100), (current_fft_i(1:100))*2/numel(current_fft_i), 'b', 'LineWidt
 ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
-ylabel('Strom [dBA]');
+ylabel('Strom [A]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_02_fft.pdf'));
@@ -212,7 +212,7 @@ semilogy(f(1:100), (current_fft_i(1:100))*2/numel(current_fft_i), 'b', 'LineWidt
 ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
-ylabel('Strom [dBA]');
+ylabel('Strom [A]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_03_fft.pdf'));
@@ -278,7 +278,7 @@ semilogy(f(1:100), (current_fft(1:100))*2/numel(current_fft), 'b', 'LineWidth', 
 ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
-ylabel('Strom [dBA]');
+ylabel('Strom [A]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_04_fft.pdf'));
@@ -339,11 +339,11 @@ f = [0:1/(t_end-time_current(1)):1/mi/2];
 current_fft = abs(fft(current(1:(t_end-time_current)/mi)));
 
 figure(105)
-semilogy(f(1:100), (current_fft_i(1:100))*2/numel(current_fft_i), 'b', 'LineWidth', LINEWIDTH);
+semilogy(f(1:100), (current_fft(1:100))*2/numel(current_fft), 'b', 'LineWidth', LINEWIDTH);
 ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
-ylabel('Strom [dBA]');
+ylabel('Strom [A]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_05_fft.pdf'));
@@ -405,11 +405,11 @@ f = [0:1/(t_end-time_current(1)):1/mi/2];
 current_fft = abs(fft(current(1:(t_end-time_current)/mi)));
 
 figure(106)
-semilogy(f(1:100), (current_fft(1:100))*2/numel(current_fft_i), 'b', 'LineWidth', LINEWIDTH);
+semilogy(f(1:100), (current_fft(1:100))*2/numel(current_fft), 'b', 'LineWidth', LINEWIDTH);
 ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
-ylabel('Strom [dBA]');
+ylabel('Strom [A]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_06_fft.pdf'));
