@@ -11,7 +11,7 @@ MAX_VOLTAGE = 325;
 MIN_VOLT_IN = -325;
 MAX_VOLT_IN = 325;
 
-% Messung 7, GR mit Glättung induktiv, Last = 8A, alpha ca. 0°
+% Messung 7, GR mit Glättung induktiv, Last = 8A, alpha ca. 0deg
 %   CH1:    Laststrom gemessen mit Stromzange 
 %   CH2:    Zündstrom Thyristor gemessen mit Stromzange
 %   CH3:    DC-Spannung gemessen mit Differentialsonde
@@ -82,7 +82,7 @@ grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '642_01.pdf'));
 
-% Messung 14, GR mit Glättung induktiv, Last = 8A, alpha ca. 90° (gerade kein Lücken)
+% Messung 14, GR mit Glättung induktiv, Last = 8A, alpha ca. 90deg (gerade kein Lücken)
 %   CH1:    Laststrom gemessen mit Stromzange 
 %   CH2:    Zündstrom Thyristor gemessen mit Stromzange
 %   CH3:    DC-Spannung gemessen mit Differentialsonde
@@ -153,7 +153,7 @@ grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '642_02.pdf'));
 
-% Messung 15, GR mit Glättung induktiv, Last = 8A, alpha ca. 60°
+% Messung 15, GR mit Glättung induktiv, Last = 8A, alpha ca. 60deg
 %   CH1:    Laststrom gemessen mit Stromzange 
 %   CH2:    Zündstrom Thyristor gemessen mit Stromzange
 %   CH3:    DC-Spannung gemessen mit Differentialsonde
@@ -224,7 +224,7 @@ grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '642_03.pdf'));
 
-% Messung 16, GR mit Glättung induktiv, Last = 8A, alpha ca. 210?° (Lücken)
+% Messung 16, GR mit Glättung induktiv, Last = 8A, alpha ca. 210?deg (Lücken)
 %   CH1:    Laststrom gemessen mit Stromzange 
 %   CH2:    Zündstrom Thyristor gemessen mit Stromzange
 %   CH3:    DC-Spannung gemessen mit Differentialsonde
@@ -295,7 +295,7 @@ grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '642_04.pdf'));
 
-% Messung 17, GR mit Glättung induktiv, Last = 8A, alpha ca. °
+% Messung 17, GR mit Glättung induktiv, Last = 8A, alpha ca. deg
 %   CH1:    Laststrom gemessen mit Stromzange 
 %   CH2:    Zündstrom Thyristor gemessen mit Stromzange
 %   CH3:    DC-Spannung gemessen mit Differentialsonde
@@ -366,7 +366,7 @@ grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '642_05.pdf'));
 
-% Messung 18, GR mit Glättung induktiv, Last = 8A, alpha ca. 10?°
+% Messung 18, GR mit Glättung induktiv, Last = 8A, alpha ca. 10?deg
 %   CH1:    Laststrom gemessen mit Stromzange 
 %   CH2:    Zündstrom Thyristor gemessen mit Stromzange
 %   CH3:    DC-Spannung gemessen mit Differentialsonde
