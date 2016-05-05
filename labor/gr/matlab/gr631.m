@@ -14,6 +14,7 @@ MIN_CURRENT = 0;
 MAX_CURRENT = 20;
 MIN_VOLTAGE = 0;
 MAX_VOLTAGE = 300;
+BASE_PERIOD = 1/50;    % 1/50Hz
 
 % Messung 1, GR mit Glättung induktiv, Lastposition 16 (27 Ohm Stellwiderstand)
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -35,11 +36,18 @@ time  = [m_01_ch_1(1,TIME):mi:le];              % correct time
 time_current  = m_01_ch_1(:,TIME);
 current       = m_01_ch_1(:,VALUE);
 time_voltage  = m_01_ch_3(:,TIME);
-voltage       = m_01_ch_3(:,VALUE);
+voltage       = m_01_ch_3(:,VALUE);  
 
 % interpolate corrupt data
 current  = interp1(time_current, current, time, 'spline');
 voltage  = interp1(time_voltage, voltage, time, 'spline');
+
+% store average values
+t_end         = floor((time_current(end)-time_current(1))/BASE_PERIOD)*BASE_PERIOD + time_current(1);
+current_avg_i = [mean(current(1:t_end/mi))];
+voltage_avg_i = [mean(voltage(1:t_end/mi))];
+
+% plots
 figure(1);
 title('B2 mit L-Glaettung');
 
@@ -60,6 +68,19 @@ ylabel('Spannung [V]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_01.pdf'));
+
+% FFT
+f = [0:1/(t_end-time_current(1)):1/mi/2];
+current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
+
+figure(101)
+semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+title('Frequenzanalyse Ausgangsstrom');
+xlabel('Frequenz [Hz]');
+ylabel('Strom [dBA]');
+grid on;
+
+print('-dpdf', strcat(PDF_DESTINATION, '631_01_fft.pdf'));
   
 % Messung 2, GR mit Glättung induktiv, Lastposition 11 (27 Ohm Stellwiderstand)
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -86,6 +107,12 @@ voltage       = m_01_ch_3(:,VALUE);
 % interpolate corrupt data
 current  = interp1(time_current, current, time, 'spline');
 voltage  = interp1(time_voltage, voltage, time, 'spline');
+
+% store average values
+t_end         = floor((time_current(end)-time_current(1))/BASE_PERIOD)*BASE_PERIOD + time_current(1);
+current_avg_i = [current_avg_i mean(current(1:t_end/mi))];
+voltage_avg_i = [voltage_avg_i mean(voltage(1:t_end/mi))];
+
 figure(2);
 title('B2 mit L-Glaettung');
 
@@ -106,6 +133,19 @@ ylabel('Spannung [V]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_02.pdf'));
+
+% FFT
+f = [0:1/(t_end-time_current(1)):1/mi/2];
+current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
+
+figure(102)
+semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+title('Frequenzanalyse Ausgangsstrom');
+xlabel('Frequenz [Hz]');
+ylabel('Strom [dBA]');
+grid on;
+
+print('-dpdf', strcat(PDF_DESTINATION, '631_02_fft.pdf'));
 
 % Messung 3, GR mit Glättung induktiv, Lastposition 6 (27 Ohm Stellwiderstand)
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -132,6 +172,12 @@ voltage       = m_01_ch_3(:,VALUE);
 % interpolate corrupt data
 current  = interp1(time_current, current, time, 'spline');
 voltage  = interp1(time_voltage, voltage, time, 'spline');
+
+% store average values
+t_end         = floor((time_current(end)-time_current(1))/BASE_PERIOD)*BASE_PERIOD + time_current(1);
+current_avg_i = [current_avg_i mean(current(1:t_end/mi))];
+voltage_avg_i = [voltage_avg_i mean(voltage(1:t_end/mi))];
+
 figure(3);
 title('B2 mit L-Glaettung');
 
@@ -152,6 +198,19 @@ ylabel('Spannung [V]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_03.pdf'));
+
+% FFT
+f = [0:1/(t_end-time_current(1)):1/mi/2];
+current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
+
+figure(103)
+semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+title('Frequenzanalyse Ausgangsstrom');
+xlabel('Frequenz [Hz]');
+ylabel('Strom [dBA]');
+grid on;
+
+print('-dpdf', strcat(PDF_DESTINATION, '631_03_fft.pdf'));
 
 % Messung 4, GR ohne Glättung, Lastposition 16 (27 Ohm Stellwiderstand)
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -178,6 +237,12 @@ voltage       = m_01_ch_3(:,VALUE);
 % interpolate corrupt data
 current  = interp1(time_current, current, time, 'spline');
 voltage  = interp1(time_voltage, voltage, time, 'spline');
+
+% store average values
+t_end         = floor((time_current(end)-time_current(1))/BASE_PERIOD)*BASE_PERIOD + time_current(1);
+current_avg   = [mean(current(1:t_end/mi))];
+voltage_avg   = [mean(voltage(1:t_end/mi))];
+
 figure(4);
 title('B2 ohne Glaettung');
 
@@ -198,6 +263,19 @@ ylabel('Spannung [V]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_04.pdf'));
+
+% FFT
+f = [0:1/(t_end-time_current(1)):1/mi/2];
+current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
+
+figure(104)
+semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+title('Frequenzanalyse Ausgangsstrom');
+xlabel('Frequenz [Hz]');
+ylabel('Strom [dBA]');
+grid on;
+
+print('-dpdf', strcat(PDF_DESTINATION, '631_04_fft.pdf'));
 
 % Messung 5, GR ohne Glättung, Lastposition 11 (27 Ohm Stellwiderstand)
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -223,6 +301,12 @@ voltage       = m_01_ch_3(:,VALUE);
 
 % interpolate corrupt data
 current  = interp1(time_current, current, time, 'spline');
+
+% store average values
+t_end         = floor((time_current(end)-time_current(1))/BASE_PERIOD)*BASE_PERIOD + time_current(1);
+current_avg   = [current_avg mean(current(1:t_end/mi))];
+voltage_avg   = [voltage_avg mean(voltage(1:t_end/mi))];
+
 figure(5);
 title('B2 ohne Glaettung');
 
@@ -243,6 +327,19 @@ ylabel('Spannung [V]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_05.pdf'));
+
+% FFT
+f = [0:1/(t_end-time_current(1)):1/mi/2];
+current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
+
+figure(105)
+semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+title('Frequenzanalyse Ausgangsstrom');
+xlabel('Frequenz [Hz]');
+ylabel('Strom [dBA]');
+grid on;
+
+print('-dpdf', strcat(PDF_DESTINATION, '631_05_fft.pdf'));
 
 % Messung 6, GR ohne Glättung, Lastposition 6 (27 Ohm Stellwiderstand)
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -269,6 +366,12 @@ voltage       = m_01_ch_3(:,VALUE);
 % interpolate corrupt data
 current  = interp1(time_current, current, time, 'spline');
 voltage  = interp1(time_voltage, voltage, time, 'spline');
+
+% store average values
+t_end         = floor((time_current(end)-time_current(1))/BASE_PERIOD)*BASE_PERIOD + time_current(1);
+current_avg   = [current_avg mean(current(1:t_end/mi))];
+voltage_avg   = [voltage_avg mean(voltage(1:t_end/mi))];
+
 figure(6);
 title('B2 ohne Glaettung');
 
@@ -289,6 +392,32 @@ ylabel('Spannung [V]');
 grid on;
 
 print('-dpdf', strcat(PDF_DESTINATION, '631_06.pdf'));
+
+% FFT
+f = [0:1/(t_end-time_current(1)):1/mi/2];
+current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
+
+figure(106)
+semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+title('Frequenzanalyse Ausgangsstrom');
+xlabel('Frequenz [Hz]');
+ylabel('Strom [dBA]');
+grid on;
+
+print('-dpdf', strcat(PDF_DESTINATION, '631_06_fft.pdf'));
+
+%------------------------------------------------------------------------------
+% Gleichspannungsmittelwert vs. Laststrommittelwert
+figure(7);
+
+plot(current_avg_i, voltage_avg_i, 'b--o', current_avg, voltage_avg, 'r--o', 'LineWidth', LINEWIDTH/2);
+legend('mit L-Glaettung', 'ohne Glaettung');
+title('Gleichspannung vs. Laststrom');
+xlabel('Lastmittel [A]');
+ylabel('Spannungsmittel [V]');
+grid on;
+
+
 
 %------------------------------------------------------------------------------
 % Einphasige Brückenschaltung - Gesteuerter Betrieb
