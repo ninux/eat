@@ -1,6 +1,9 @@
 .PHONY: all build clean
 
-all: build clean
+all: plots build clean
+
+plots:
+	./plot.sh
 
 build:
 	pdflatex gr.tex
