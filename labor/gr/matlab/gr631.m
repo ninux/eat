@@ -9,12 +9,14 @@
 %   PDF_DESTINATION     Destination for pdf output files
 %   LINEWIDTH           Line width for plots
 
-AXIS_FACTOR = 1.05;
-MIN_CURRENT = 0;
-MAX_CURRENT = 20;
-MIN_VOLTAGE = 0;
-MAX_VOLTAGE = 300;
-BASE_PERIOD = 1/50;    % 1/50Hz
+AXIS_FACTOR   = 1.05;
+MIN_CURRENT   = 0;
+MAX_CURRENT   = 20;
+MIN_VOLTAGE   = 0;
+MAX_VOLTAGE   = 300;
+BASE_PERIOD   = 1/50;    % 1/50Hz
+FFT_LOG_Y_MIN = 1E-3;
+FFT_LOG_Y_MAX = 1E2;
 
 % Messung 1, GR mit Glättung induktiv, Lastposition 16 (27 Ohm Stellwiderstand)
 %   CH1:    Laststrom gemessen mit Stromzange 
@@ -74,7 +76,8 @@ f = [0:1/(t_end-time_current(1)):1/mi/2];
 current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
 
 figure(101)
-semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+semilogy(f(1:100), (current_fft_i(1:100))*2/numel(current_fft_i), 'b', 'LineWidth', LINEWIDTH);
+ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
 ylabel('Strom [dBA]');
@@ -139,7 +142,8 @@ f = [0:1/(t_end-time_current(1)):1/mi/2];
 current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
 
 figure(102)
-semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+semilogy(f(1:100), (current_fft_i(1:100))*2/numel(current_fft_i), 'b', 'LineWidth', LINEWIDTH);
+ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
 ylabel('Strom [dBA]');
@@ -204,7 +208,8 @@ f = [0:1/(t_end-time_current(1)):1/mi/2];
 current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
 
 figure(103)
-semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+semilogy(f(1:100), (current_fft_i(1:100))*2/numel(current_fft_i), 'b', 'LineWidth', LINEWIDTH);
+ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
 ylabel('Strom [dBA]');
@@ -266,10 +271,11 @@ print('-dpdf', strcat(PDF_DESTINATION, '631_04.pdf'));
 
 % FFT
 f = [0:1/(t_end-time_current(1)):1/mi/2];
-current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
+current_fft = abs(fft(current(1:(t_end-time_current)/mi)));
 
 figure(104)
-semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+semilogy(f(1:100), (current_fft(1:100))*2/numel(current_fft), 'b', 'LineWidth', LINEWIDTH);
+ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
 ylabel('Strom [dBA]');
@@ -330,10 +336,11 @@ print('-dpdf', strcat(PDF_DESTINATION, '631_05.pdf'));
 
 % FFT
 f = [0:1/(t_end-time_current(1)):1/mi/2];
-current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
+current_fft = abs(fft(current(1:(t_end-time_current)/mi)));
 
 figure(105)
-semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+semilogy(f(1:100), (current_fft_i(1:100))*2/numel(current_fft_i), 'b', 'LineWidth', LINEWIDTH);
+ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
 ylabel('Strom [dBA]');
@@ -395,10 +402,11 @@ print('-dpdf', strcat(PDF_DESTINATION, '631_06.pdf'));
 
 % FFT
 f = [0:1/(t_end-time_current(1)):1/mi/2];
-current_fft_i = abs(fft(current(1:(t_end-time_current)/mi)));
+current_fft = abs(fft(current(1:(t_end-time_current)/mi)));
 
 figure(106)
-semilogy(f(1:100), (current_fft_i(1:100)), 'b', 'LineWidth', LINEWIDTH);
+semilogy(f(1:100), (current_fft(1:100))*2/numel(current_fft_i), 'b', 'LineWidth', LINEWIDTH);
+ylim([FFT_LOG_Y_MIN FFT_LOG_Y_MAX]);
 title('Frequenzanalyse Ausgangsstrom');
 xlabel('Frequenz [Hz]');
 ylabel('Strom [dBA]');
@@ -417,108 +425,5 @@ xlabel('Lastmittel [A]');
 ylabel('Spannungsmittel [V]');
 grid on;
 
+print('-dpdf', strcat(PDF_DESTINATION, '631_avg.pdf'));
 
-
-%------------------------------------------------------------------------------
-% Einphasige Brückenschaltung - Gesteuerter Betrieb
-
-% Messung 7, GR mit Glättung induktiv, Last = 6A, alpha ca. 0°
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    Zündstrom Thyristor gemessen mit Stromzange
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    Phasenspannung gemessen mit Differentialsonde
-%   Ordner: ALL0008
-
-% Messung 8, GR mit Glättung induktiv, Last = 6A, alpha ca. ???° (gerade kein Lücken)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    Zündstrom Thyristor gemessen mit Stromzange
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    Phasenspannung gemessen mit Differentialsonde
-%   Ordner: ALL0010
-
-% Messung 9, GR mit Glättung induktiv, Last = 6A, alpha ca. ???° (Lücken)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    Zündstrom Thyristor gemessen mit Stromzange
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    Phasenspannung gemessen mit Differentialsonde
-%   Ordner: ALL0012
-
-% Messung 10, GR mit Glättung induktiv, Last = 6A, alpha ca. ???° (Lücken)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    Zündstrom Thyristor gemessen mit Stromzange
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    Phasenspannung gemessen mit Differentialsonde
-%   Ordner: ALL0014
-
-% Messung 11, GR mit Glättung induktiv, Last = 6A, alpha ca. 90° (Lücken)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    Zündstrom Thyristor gemessen mit Stromzange
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    Phasenspannung gemessen mit Differentialsonde
-%   Ordner: ALL0015
-
-% Messung 12, GR mit Glättung induktiv, Last = 6A, alpha ca. ???° (Lücken)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    Zündstrom Thyristor gemessen mit Stromzange
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    Phasenspannung gemessen mit Differentialsonde
-%   Ordner: ALL0017
-
-%------------------------------------------------------------------------------
-% Kommutierung
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%------------------------------------------------------------------------------
-% Dreiphasige Brückenschaltung - Ungesteuerter Betrieb
-
-% Messung 13, GR mit Glättung induktiv, Lastposition 16 (2x27 Ohm Stellwiderstand)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    -
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    L1-L2 Spannung gemessen mit Differentialsonde
-%   Ordner: ALL0019
-
-% Messung 13, GR mit Glättung induktiv, Lastposition 11 (2x27 Ohm Stellwiderstand)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    -
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    L1-L2 Spannung gemessen mit Differentialsonde
-%   Ordner: ALL0020
-
-% Messung 13, GR mit Glättung induktiv, Lastposition 6 (2x27 Ohm Stellwiderstand)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    -
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    L1-L2 Spannung gemessen mit Differentialsonde
-%   Ordner: ALL0021
-
-% Messung 13, GR mit Glättung induktiv, Lastposition 4 (2x27 Ohm Stellwiderstand)
-%   CH1:    Laststrom gemessen mit Stromzange 
-%   CH2:    -
-%   CH3:    DC-Spannung gemessen mit Differentialsonde
-%   CH4:    L1-L2 Spannung gemessen mit Differentialsonde
-%   Ordner: ALL0022
-
-%------------------------------------------------------------------------------
-% Dreiphasige Brückenschaltung - Gesteuerter Betrieb
-%------------------------------------------------------------------------------
-% Kommutierung
-%------------------------------------------------------------------------------
-% Strombegrenzung
-%------------------------------------------------------------------------------
-% Spannungsbelastung der Halbleiter
-%------------------------------------------------------------------------------
-% Wechselrichterbetrieb
-%------------------------------------------------------------------------------
-% Netzrückwirkungen
-%------------------------------------------------------------------------------
-% Stromoberschwingungen
-%------------------------------------------------------------------------------
-% Leistungsfaktor
-%------------------------------------------------------------------------------
-% Kommutierungseinbrüche
-%------------------------------------------------------------------------------
-% 12-pulsiger Betrieb
-%------------------------------------------------------------------------------
-% Aktives Oberwellenfilter
